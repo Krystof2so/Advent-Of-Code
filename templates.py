@@ -15,22 +15,20 @@ def timer(func):
     return _timer
 
 
-class CrossedWires:
+class ClassName:
 
-    def __init__(self, puzzle: str) -> None:
-        self.puzzle: str = puzzle
-        self.wire1_path, self.wire2_path = self._extract_datas()
+    def __init__(self) -> None:
+       self.all_datas = self._extract_datas() 
 
     @timer
     def display_result(self) -> None:
-        print(f"{self.wire1_path}\n{self.wire2_path}")
+        print(f"{self.all_datas}")
 
-    def _extract_datas(self) -> tuple[list[str], list[str]]:
-        with (Path(__file__).parent / self.puzzle).open("r", encoding="utf-8") as f:
-            wire1_path = f.readline().strip().split(',')
-            wire2_path = f.readline().strip().split(',')
-        return wire1_path, wire2_path
+    def _extract_datas(self) -> list:
+        with (Path(__file__).parent / DATAS_FILE).open("r", encoding="utf-8") as f:
+            list_datas = [line[:-1] for line in f]
+        return list_datas
 
 
 if __name__ == "__main__":
-    CrossedWires(DATAS_FILE).display_result()
+    ClassName().display_result()
